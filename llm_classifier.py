@@ -1,22 +1,22 @@
-# import pandas as pd
-# import re
-# from collections import Counter
-# import torch.nn as nn
-# import pandas as pd
+import pandas as pd
+import re
+from collections import Counter
+import torch.nn as nn
+import pandas as pd
 
-# news_df = pd.read_csv("news.csv")
+news_df = pd.read_csv("news.csv")
 
 # # 1. Count headlines per row and find top 10 tickers
-# news_df["headline_count"] = news_df["headline"].astype(str).str.count("\x1f") + 1
+news_df["headline_count"] = news_df["headline"].astype(str).str.count("\x1f") + 1
 
-# top_10_symbols = (
-#     news_df.groupby("symbol")["headline_count"]
-#     .sum()
-#     .sort_values(ascending=False)
-#     .head(10)
-#     .index.tolist()  # <-- Convert index to a plain Python list of ticker strings!
-# )
-# # print("Top 10 tickers:", top_10_symbols)
+top_10_symbols = (
+    news_df.groupby("symbol")["headline_count"]
+    .sum()
+    .sort_values(ascending=False)
+    .head(10)
+    .index.tolist()  # <-- Convert index to a plain Python list of ticker strings!
+)
+print("Top 10 tickers:", top_10_symbols)
 
 # # 2. Filter using the list of ticker strings
 # news_df = news_df[news_df["symbol"].isin(top_10_symbols)].copy()
@@ -46,7 +46,7 @@
 
 
 # Load news dataset
-# news = pd.read_csv("historical_impacts_values-latest.csv")
+# news = pd.read_csv("historical_impacts_values-version2.csv")
 # # 1. Read the combined CSV file
 # print(news.head())
 # print(news.info())
@@ -707,7 +707,7 @@ def evaluate(model: nn.Module, loader: DataLoader, criterion: nn.Module):
 
 def train_model(
     news_path="news.csv",
-    impacts_path="historical_impacts_values-latest.csv",
+    impacts_path="historical_impacts_values-version2.csv",
     epochs=10,
     batch_size=64,
     lr=1e-3,
@@ -772,5 +772,5 @@ def train_model(
     print(classification_report(test_labels, test_preds, zero_division=0))
 
 
-if __name__ == "__main__":
-    train_model()
+# if __name__ == "__main__":
+#     train_model()
